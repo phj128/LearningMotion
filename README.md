@@ -1,9 +1,8 @@
 # Learning Motion
 
-
 ## Motivation of this repository
 
-1. 面向实验室本科生的科研训练。通过复现[SAMP](https://samp.is.tue.mpg.de/)的MotioNet来学习基于自回归模型的Motion Synthesis算法、PyTorch编程。
+1. 面向实验室本科生的科研训练。通过复现[SAMP](https://samp.is.tue.mpg.de/)的MotionNet来学习基于自回归模型的Motion Synthesis算法、PyTorch编程。
 2. 这个框架主要由我个人使用，如果有一些design上的建议请直接提issue。
 
 ## 如何使用这个代码框架 
@@ -22,11 +21,11 @@
 3. 按照SAMP的流程能够成功运行SAMP的Demo并能够使用WSAD来操作人物和执行和物体的交互。
 
 ### Python
-1. 确保你已经熟悉使用python, 尤其是debug工具：ipdb。
+1. 确保你已经熟悉使用python, 尤其是debug工具: ipdb。
 
 2. 计算机科学非常讲究自学能力和自我解决问题的能力，如果有一些内容没有介绍的十分详细，请先自己尝试探索代码框架。如果遇到代码问题，请先搜索网上的资料，或者查看仓库的Issues里有没有相似的已归档的问题。
 
-3. 如果有问题，也欢迎直接在这个仓库的issue里提问。
+3. 如果有问题，也欢迎直接在这个仓库的Issue里提问。
 
 ## Data preparation
 
