@@ -1,0 +1,40 @@
+TYPE: 'DefaultTrainer'
+cfg:
+  DATALOADER:
+    batch_size: 32
+    num_workers: 2
+  DATASET:
+    TYPE: 'SAMPData'
+    cfg:
+      data_dir: "./datasets/samp/MotionNet"
+      valid_batch_size: 32
+  MODEL:
+    TYPE: 'MotionPredictor'
+    cfg:
+      state_dim: 647
+      I_in_dim: 2048
+      I_out_dim: 256
+      h_dim: 512
+      pred_in_dim: 903
+      DECODER_TYPE: "MLPDecoder"
+  PIPELINE:
+    TYPE: 'RegressionPipeline'
+  CRITERION:
+    TYPE: "RegressionCriterion"
+  OPTIMIZER:
+    lr: 0.00005
+  SCHEDULE:
+    max_epochs: 100
+    scheduler:
+      TYPE: "LambdaLR"
+      lr_lambda: "linear_epoch_func"
+  HOOK:
+    hook_save:
+      interval: 10
+    hook_eval:
+      interval: 10
+      test_before_train: False
+    hook_resume:
+      TYPE: 'ResumeHook'
+      priority: 0
+  output_dir: 'work_dirs/mlp'

@@ -1,0 +1,4 @@
+cfg:
+  ONNX:
+    input_names: ["z", "x1", "x2"]
+    input_shapes: [[64], [647], [2048]]
