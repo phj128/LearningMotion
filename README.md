@@ -66,9 +66,9 @@ python torch2onnx.py --config configs/samp/mlp.yaml,configs/samp/onnx/regression
 
 ### Use ONNX in Unity
 
-把ONNX模型放到Unity的文件夹下，运行Unity。
+把ONNX模型放到Unity代码的文件夹```Assets/OnnxModels/```下。
 
-选中Unity界面里的03301_red，在右侧的Inspector栏中的SAMPNN(Script)里的Model Asset属性来选择对应的ONNX模型，来查看你训练的效果。
+打开Unity代码文件夹中的```Assets/Demo/Main_Demo.unity```，选中Unity界面左侧的Hierarchy里的03301_red，在右侧的Inspector栏中的SAMPNN(Script)里的Model Asset属性来选择对应的ONNX模型，来查看你训练的效果。
 
 你会发现训练出来的MLP模型仅仅能实现基本的站立，不能完成走路和与物体交互。
 
@@ -104,9 +104,9 @@ python torch2onnx.py --config configs/samp/mlp.yaml,configs/samp/onnx/regression
 
 我们已经在 ```configs/samp/``` 中创建好了一个配置文件， ```configs/samp/samp.yaml``` 。其中包含了使用VAE所需要的参数。
 
-完成这一任务需要在 ```motion/modeling/modules/encoder/samp.py``` 中实现VAE的encoder， 在 ```motion/modeling/modules/decoder/samp.py``` 中实现VAE的decoder。请注意，SAMP的MotionNet是在MoE的基础上增加的VAE。
-
 我们已经为你实现了基本的逻辑，需要你来完成具体的网络搭建。
+
+完成这一任务需要在 ```motion/modeling/modules/encoder/samp.py``` 中实现VAE的encoder， 在 ```motion/modeling/modules/decoder/samp.py``` 中实现VAE的decoder。请注意，SAMP的MotionNet是在MoE的基础上增加的VAE。
 
 为了能够转换成ONNX，你需要参考 ```motion/modeling/modules/decoder/mlp.py``` 实现VAE对应的ONNX模型。
 
