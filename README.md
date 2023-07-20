@@ -47,7 +47,7 @@ datasets/samp
 ### Training
 
 ```
-python train_net.py --config configs/samp/mlp.yaml
+python train.py --config configs/samp/mlp.yaml
 ```
 
 ### 查看loss曲线
