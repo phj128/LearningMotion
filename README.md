@@ -80,6 +80,12 @@ python torch2onnx.py --config configs/samp/mlp.yaml,configs/samp/onnx/regression
 
 我们已经在 ```configs/samp/``` 中创建好了一个配置文件， ```configs/samp/mlp_ss.yaml``` 。
 
+即完成这一部分后可以使用如下指令来运行模型：
+
+```
+python train.py --config configs/samp/mlp_ss.yaml
+```
+
 实现 Scheduled Sampling 主要是需要实现连续两帧的feature转换。
 
 完成这一任务需要你修改 ```motion/utils/samp.py``` 里的代码，实现 ```transform_data``` 所需要的各个函数。
