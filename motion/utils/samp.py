@@ -316,8 +316,8 @@ def transform_pose(pose_vec_in, pose_vec_out, NJ=22, pose_feat_dim=12):
     root_mat_out = project_root(pose_mat_world_out)
 
     # Convert to transforms wrt frame i+1
-    root_mat_out_inv = torch.inverse(root_mat_out[:, None])
-    pose_mat_out_transformed = torch.matmul(root_mat_out_inv, pose_mat_world_out)
+    root_mat_out_inv = torch.inverse(root_mat_out[:, None])[:, 0]
+    pose_mat_out_transformed = torch.matmul(root_mat_out_inv[:, None], pose_mat_world_out)
 
     # Convert velocity
     velocity_out_transformed = convert_vel(
@@ -331,7 +331,7 @@ def transform_pose(pose_vec_in, pose_vec_out, NJ=22, pose_feat_dim=12):
     return (
         pose_vec_out_transformed.reshape(bs, NJ * pose_feat_dim),
         root_mat_in,
-        root_mat_out_inv,
+        root_mat_out_inv[:, None],
     )
 
 
