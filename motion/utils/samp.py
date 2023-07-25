@@ -47,7 +47,7 @@ def split_pose_feat(data):
 
 def project_root(pose_mat_world):
     """_summary_
-        return the matrix of root
+        return the matrix of root, include three direction (right, up, forward) vector and the xz position of root
 
     Args:
         pose_mat_world (tensor): [B, J, 4, 4]
@@ -59,11 +59,14 @@ def project_root(pose_mat_world):
     bs = pose_mat_world.shape[0]
     pose_pos_world = pose_mat_world[:, :, :3, 3]
 
+    # last row of the transformation matrix
     lastrow = torch.tensor(
         np.tile(np.array([[[0, 0, 0, 1]]]), (bs, 1, 1)),
         device=pose_mat_world.device,
         dtype=torch.float32,
     )
+    
+    # unit vectors in y direction (i.e. up vectors)
     up_root = torch.tensor(
         np.tile(np.array([[0, 1, 0]]), (bs, 1)),
         device=pose_mat_world.device,
@@ -80,11 +83,16 @@ def project_root(pose_mat_world):
     ############################
     #
     #
-    # TODO: Implement here!
-    #
+    # TODO: Implement here! To get the rest two direction vectors.
+    # 
     #
     ############################
-
+    
+    # replace '...' with the gotten three direction (right, up, forward) vector
+    # mat_world_root = torch.stack(
+    #     [..., pos_root],
+    #     dim=-1
+    # )
     mat_world_root = torch.cat([mat_world_root, lastrow], dim=1)
     return mat_world_root
 
@@ -308,8 +316,8 @@ def transform_pose(pose_vec_in, pose_vec_out, NJ=22, pose_feat_dim=12):
     root_mat_out = project_root(pose_mat_world_out)
 
     # Convert to transforms wrt frame i+1
-    root_mat_out_inv = torch.inverse(root_mat_out[:, None])
-    pose_mat_out_transformed = torch.matmul(root_mat_out_inv, pose_mat_world_out)
+    root_mat_out_inv = torch.inverse(root_mat_out[:, None])[:, 0]
+    pose_mat_out_transformed = torch.matmul(root_mat_out_inv[:, None], pose_mat_world_out)
 
     # Convert velocity
     velocity_out_transformed = convert_vel(
@@ -323,7 +331,7 @@ def transform_pose(pose_vec_in, pose_vec_out, NJ=22, pose_feat_dim=12):
     return (
         pose_vec_out_transformed.reshape(bs, NJ * pose_feat_dim),
         root_mat_in,
-        root_mat_out_inv,
+        root_mat_out_inv[:, None],
     )
 
 

@@ -1,0 +1,9 @@
+numpy==1.24.3
+onnxruntime==1.15.1
+pandas==2.0.1
+tensorboardX==2.6.1
+termcolor==2.3.0
+threadpoolctl==3.2.0
+torch==2.0.1
+tqdm==4.65.0
+yacs==0.1.8
